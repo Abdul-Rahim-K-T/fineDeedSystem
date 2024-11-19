@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package shared;
+
+option go_package = "fineDeedSystem/proto/shared;shared";
+
+// The Employer model.
+message Employer {
+    uint32 id = 1;
+    string name = 2;
+    string email = 3;
+    string phone = 4;
+    string company_name = 5;
+    string password = 6;
+}
+
+// Request message for listing employers.
+message ListEmployersRequest {}
+
+// Response message containing a list of employers.
+message ListEmployersResponse {
+    repeated Employer employers = 1;
+}
+
+// Request message for creating an employer.
+message CreateEmployerRequest {
+    Employer employer = 1; // The employer to create
+}
+
+// Response message for creating an employer.
+message CreateEmployerResponse {
+    Employer employer = 1; // The created employer
+}
+
+// req mesg for GetEmployerById
+message GetEmployerByIdRequest {
+    uint32 id =1;
+}
+
+// resp msg for GetEmployerById
+message GetEmployerByIdResponse {
+    Employer employer =1;
+}
+
+// req msg for UpdateEmployer by id
+message UpdateEmployerRequest {
+    Employer employer = 1;
+}
+// res msg for UpdateEmployer by id
+message UpdateEmployerResponse {
+    Employer employer = 1;
+}
+
+// Req msg for DeleteEmployer
+message DeleteEmployerRequest {
+    uint32 id = 1;
+}
+
+// Res message for DeleteEmployer
+message DeleteEmployerResponse {
+    string message = 1;
+}
+
+// The employer service definition.
+service EmployerService {
+    rpc ListEmployers(ListEmployersRequest) returns (ListEmployersResponse);
+    rpc CreateEmployer(CreateEmployerRequest) returns (CreateEmployerResponse);
+    rpc GetEmployerByID(GetEmployerByIdRequest) returns (GetEmployerByIdResponse);
+    rpc UpdateEmployer(UpdateEmployerRequest) returns (UpdateEmployerResponse);
+    rpc DeleteEmployer(DeleteEmployerRequest) returns (DeleteEmployerResponse);
+}

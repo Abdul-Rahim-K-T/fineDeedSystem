@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package employer;
+
+option go_package = "fineDeedSystem/proto/employer;employer";
+
+// The Employer model.
+message Employer {
+    uint32 id = 1;
+    string name = 2;
+    string email = 3;
+    string phone = 4;
+    string company_name = 5;
+}
+
+// Request message for listing employers.
+message ListEmployersRequest {}
+
+// Response message containing a list of employers.
+message ListEmployersResponse {
+    repeated Employer employers = 1;
+}
+
+// The employer service definition.
+service EmployerService {
+    rpc ListEmployers(ListEmployersRequest) returns (ListEmployersResponse);
+}
